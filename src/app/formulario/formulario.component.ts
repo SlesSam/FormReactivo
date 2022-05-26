@@ -1,0 +1,100 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Country } from '../interface/country.interface';
+import { Users } from '../interface/user.interface';
+import { countryService } from '../service/country.service';
+import { CrudUsua } from '../service/crud-usua.service';
+
+@Component({
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
+})
+export class FormularioComponent implements OnInit {
+
+  usersArray:Users[]=[];
+  user!:Users
+  countr:Country[]=[]
+  
+
+  myForm= new  FormGroup ({
+    'id' :new FormControl(''),
+    'name': new FormControl('',Validators.required),
+    'password': new FormControl('',[Validators.required,Validators.min(3)]),
+    'passwordConfirme':  new FormControl('',[Validators.required,Validators.min(3)]),
+    'email':  new FormControl('',[Validators.required,Validators.email]),
+    'promocion': new FormControl(false,Validators.required),
+    'pais': new FormControl('',Validators.required),
+  });
+  
+
+  constructor(
+    private countries: countryService,
+    private people: CrudUsua,) { }
+
+  ngOnInit(): void {
+    //traemos a los usuario
+    this.people.usersAll
+      .subscribe(u=>{
+        this.usersArray=u;
+        console.log('hola estoy en formulario', u)
+      });
+
+    // this.usersArray=this.people.allUsers();
+    console.log(this.usersArray, 'estoy en formulario')
+    
+
+      //aqui se trae la informacion 
+      this.countr =  this.countries.c;
+      console.log(this.countr, 'soy paises de formulario')
+      
+  }
+
+//aqui se edita el usuario cuando se trae el id
+  editar(u:Users){
+    this.myForm.patchValue(u);
+  }
+
+//esta funcion se añade y a la vez se edita 
+  addOrEdit(){
+    const id = this.myForm.get('id')?.value;
+
+    if(!id){
+      this.user = this.myForm.value;
+      this.people.crearteUser(this.user)
+        .subscribe( (resp) => {
+          
+          console.log(resp,' estoy dentro de Bntaddedit')
+          this.ngOnInit();
+        })
+        this.myForm.reset();
+    } else{
+      this.user = this.myForm!.value;
+      this.people.updateUsers(this.user)
+        .subscribe( (resp) => {
+          this.usersArray = resp;
+          
+          console.log(resp, ' se va actualizar ')
+          
+          this.ngOnInit();
+        })
+        this.myForm.reset();
+      
+    }
+
+  }
+
+
+  coincide(password1:string, password2:string){
+
+    if(password1===password2){
+      return true
+    }else{
+      return false
+    }
+  }
+
+
+
+}

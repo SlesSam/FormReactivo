@@ -1,0 +1,18 @@
+table{
+    
+    background:#333354;
+    color:rgb(243, 217, 217);
+    width:320px;
+    padding:16px 4px 16px 0;
+    border-radius:6px;
+    font-size:15px;
+    box-shadow:10px 10px 40px -14px #000
+}
+
+.btn{
+    color: aliceblue;
+}
+
+span{
+    font-size: 15px;
+}

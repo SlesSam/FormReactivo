@@ -1,0 +1,55 @@
+<h2>formulario!!!</h2>
+
+<div class="row">
+
+    <div class="col-md-4" >
+
+        <form autocomplete="off" [formGroup]="myForm" id="form">
+
+                Usuario<br>
+            <input type="text" name="name" placeholder="Nombre.."
+                formControlName="name" class="form-control"><br>
+
+                Contraseña<br>
+            <input type="password" 
+                formControlName="password"
+                name="password" placeholder="password.." class="form-control"><br>
+
+                Confirmar Contraseña<br>
+            <input type="password" name="passwordConfirme" 
+                formControlName="passwordConfirme" placeholder="password.." class="form-control"><br>
+
+            <span class="text-danger" *ngIf="coincide(myForm.get('password')?.value, myForm.get('passwordConfirme')?.value)">
+                No coiciden, introduca una contreseña similar.
+            </span> <br>
+                
+                Correo<br>
+            <input type="email" 
+                formControlName="email" name="email" placeholder="email...." 
+                class="form-control"><br>
+            
+                <input id="check" type="checkbox" 
+                formControlName="promocion" 
+                name="promocion"class="form-check"> <p>Subcribir a las oferta</p> 
+               
+                Pais<br>
+            <select type="text"  formControlName="pais" id="pais" class="form-control">
+                <option>selecciona un País</option>
+                <option *ngFor="let c of countr">{{c.name}}</option>
+            </select>
+                <br>
+
+
+            <button (click)="addOrEdit()">save</button>
+
+        </form>
+
+    </div>
+
+    <div class="col-md-5">
+        <app-resultado [usurs]="usersArray" (usuario)="editar($event)"></app-resultado>
+    </div>
+
+
+
+</div>
