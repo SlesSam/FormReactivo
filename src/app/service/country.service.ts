@@ -17,14 +17,16 @@ export class countryService{
     //     return this.htp.get<Country[]>(`https://restcountries.com/v2/all`)
     // }
 
+
+    //lo malo q en el primer fresh no sale los paises pero cuando introduces lo al primero y le das guardar ya aparecen los paises 
+    
+
 get c(){
     fetch('https://restcountries.com/v2/all')
     .then((response) => response.json())
-    .then((json)=> this.count.push(...json));
+    .then((json)=> this.count = json);
 
     return this.count;
-
-    console.log(this.count, ' hola soy paises')
 
 }
    

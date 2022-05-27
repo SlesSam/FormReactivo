@@ -16,24 +16,28 @@ export class FormularioComponent implements OnInit {
   usersArray:Users[]=[];
   user!:Users
   countr:Country[]=[]
-  
 
-  myForm= new  FormGroup ({
-    'id' :new FormControl(''),
-    'name': new FormControl('',Validators.required),
-    'password': new FormControl('',[Validators.required,Validators.min(3)]),
-    'passwordConfirme':  new FormControl('',[Validators.required,Validators.min(3)]),
-    'email':  new FormControl('',[Validators.required,Validators.email]),
-    'promocion': new FormControl(false,Validators.required),
-    'pais': new FormControl('',Validators.required),
-  });
-  
 
+  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  public myForm!: FormGroup;
+  
   constructor(
     private countries: countryService,
     private people: CrudUsua,) { }
 
   ngOnInit(): void {
+
+    this.myForm= new  FormGroup ({
+      'id' :new FormControl(''),
+      'name': new FormControl('',Validators.required),
+      'password': new FormControl('',[Validators.required,Validators.min(3)]),
+      'passwordConfirme':  new FormControl('',[Validators.required,Validators.min(3)]),
+      'email':  new FormControl('',[Validators.required,Validators.pattern(this.emailPattern)]),
+      'oferta': new FormControl(false),
+      'pais': new FormControl('',Validators.required),
+    });
+
+
     //traemos a los usuario
     this.people.usersAll
       .subscribe(u=>{
@@ -86,14 +90,26 @@ export class FormularioComponent implements OnInit {
   }
 
 
-  coincide(password1:string, password2:string){
+  coincide(){
 
-    if(password1===password2){
-      return true
-    }else{
+    const password1  = this.myForm.get('password')?.value;
+    const password2 = this.myForm.get('passwordConfirme')?.value;
+
+    if(password1!==password2){
       return false
+      console.log('no coinciden')
+    }else{
+      return true;
+      
     }
   }
+
+
+  
+
+
+
+  
 
 
 

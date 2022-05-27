@@ -1,42 +1,57 @@
-<h2>formulario!!!</h2>
+<h1>formulario</h1>
 
 <div class="row">
-
-    <div class="col-md-4" >
-
+    
+    <div class="col-md-5" >
+        
         <form autocomplete="off" [formGroup]="myForm" id="form">
 
                 Usuario<br>
-            <input type="text" name="name" placeholder="Nombre.."
-                formControlName="name" class="form-control"><br>
+            <input type="text" name="name" placeholder="Nombre.." formControlName="name" 
+            class="form-control" required>
+            <span
+            *ngIf="this.myForm.get('name')?.touched && this.myForm.get('name')?.errors?.['required']" 
+            class="text-danger">Este campo es requerido.
+            </span>
+            <br>
 
                 Contraseña<br>
-            <input type="password" 
-                formControlName="password"
-                name="password" placeholder="password.." class="form-control"><br>
-
+            <input type="password" formControlName="password" name="password"
+            placeholder="password.." class="form-control" required>
+            <span 
+            *ngIf="this.myForm.get('password')?.touched && this.myForm.get('password')?.errors?.['required']"
+                 class="text-danger">Este campo es requerido</span>
+                <br><br>
                 Confirmar Contraseña<br>
             <input type="password" name="passwordConfirme" 
-                formControlName="passwordConfirme" placeholder="password.." class="form-control"><br>
-
-            <span class="text-danger" *ngIf="coincide(myForm.get('password')?.value, myForm.get('passwordConfirme')?.value)">
+                formControlName="passwordConfirme" placeholder="password.." class="form-control" required><br>
+                <span 
+                *ngIf="this.myForm.get('passwordConfirme')?.touched && this.myForm.get('passwordConfirme')?.errors?.['required']"
+                 class="text-danger" >Este campo es requerido</span>
+            <span class="text-danger" *ngIf="!coincide()">
                 No coiciden, introduca una contreseña similar.
             </span> <br>
                 
                 Correo<br>
             <input type="email" 
                 formControlName="email" name="email" placeholder="email...." 
-                class="form-control"><br>
+                class="form-control" required>
+                <span 
+                *ngIf="this.myForm.get('email')?.touched && this.myForm.get('email')?.errors?.['required']"
+                 class="text-danger" >Este campo es requerido</span>
+                <br>
             
                 <input id="check" type="checkbox" 
-                formControlName="promocion" 
-                name="promocion"class="form-check"> <p>Subcribir a las oferta</p> 
+                formControlName="oferta" 
+                name="oferta" class="form-check"> <p>Subcribir a las oferta</p> 
                
                 Pais<br>
-            <select type="text"  formControlName="pais" id="pais" class="form-control">
+            <select type="text"  formControlName="pais" id="pais" class="form-control" required>
                 <option>selecciona un País</option>
-                <option *ngFor="let c of countr">{{c.name}}</option>
+                <option *ngFor="let country of countr">{{country.name}}</option>
             </select>
+            <span *ngIf="this.myForm.get('pais')?.touched && this.myForm.get('pais')?.errors?.['required']"
+             class="text-danger" >No debes dejarlo en blanco</span>
                 <br>
 
 
@@ -47,7 +62,7 @@
     </div>
 
     <div class="col-md-5">
-        <app-resultado [usurs]="usersArray" (usuario)="editar($event)"></app-resultado>
+        <app-resultado [usersArrys]="usersArray" (usuarioEmit)="editar($event)"></app-resultado>
     </div>
 
 

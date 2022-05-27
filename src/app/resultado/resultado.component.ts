@@ -9,8 +9,8 @@ import { CrudUsua } from '../service/crud-usua.service';
   
 })
 export class ResultadoComponent implements OnInit {
-    @Input() usurs!:Users[]
-    @Output() usuario:EventEmitter<Users>=new EventEmitter()
+    @Input() usersArrys!:Users[]
+    @Output() usuarioEmit:EventEmitter<Users>=new EventEmitter()
 
   constructor(private usua:CrudUsua) { }
 
@@ -18,7 +18,7 @@ export class ResultadoComponent implements OnInit {
 //aqui se trae el resultado de users
       this.usua.usersAll
         .subscribe(u=>{
-          this.usurs=u;
+          this.usersArrys=u;
         console.log(u, ' soy del resultado')
         })
 
@@ -30,7 +30,7 @@ export class ResultadoComponent implements OnInit {
   edit(use:Users){
     this.usua.getUsur(use)
       .subscribe(re=>{
-        this.usuario.emit(re);
+        this.usuarioEmit.emit(re);
         this.ngOnInit()
         console.log(re, ' vamos a editar eso')
       })

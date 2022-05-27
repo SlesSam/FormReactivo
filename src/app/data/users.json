@@ -6,17 +6,17 @@
       "password": "12343",
       "passwordConfirme": "12343",
       "email": "Sincere@april.biz",
-      "promocion": true,
+      "oferta": true,
       "pais": "Sri Lanka"
     },
     {
       "id": 2,
-      "name": "Ervin Howell",
-      "password": "12343",
-      "passwordConfirme": "12343",
+      "name": "Ervin Howell ",
+      "password": "12341",
+      "passwordConfirme": "12341",
       "email": "Shanna@melissa.tv",
-      "promocion": true,
-      "pais": "Peru"
+      "oferta": true,
+      "pais": "Norway"
     },
     {
       "id": 3,
@@ -53,42 +53,6 @@
       "password2": "12343",
       "oferta": false,
       "pais": "Germany"
-    },
-    {
-      "id": 7,
-      "name": "Kurtis Weissnat",
-      "email": "Telly.Hoeger@billy.biz",
-      "password": "12343",
-      "password2": "12343",
-      "oferta": true,
-      "pais": "Alemania"
-    },
-    {
-      "id": 8,
-      "name": "Nicholas Runolfsdottir V",
-      "email": "Sherwood@rosamond.me",
-      "password": "12343",
-      "password2": "12343",
-      "oferta": true,
-      "pais": "Spain"
-    },
-    {
-      "id": 9,
-      "name": "Glenna Reichert",
-      "email": "Chaim_McDermott@dana.io",
-      "password": "12343",
-      "password2": "12343",
-      "oferta": false,
-      "pais": "Costa Rica"
-    },
-    {
-      "id": 10,
-      "name": "Clementina DuBuque",
-      "email": "Rey.Padberg@karina.biz",
-      "password": "12343",
-      "password2": "12343",
-      "oferta": false,
-      "pais": "Francia"
     }
   ]
 }
